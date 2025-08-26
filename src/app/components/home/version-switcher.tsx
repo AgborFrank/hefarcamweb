@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
 
@@ -25,8 +23,8 @@ export function VersionSwitcher({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="w-full justify-between">
-          <span className="text-sm font-medium">v{selectedVersion}</span>
+        <Button variant="outline" className="w-full justify-between">
+          <span className="text-sm font-medium">Version {selectedVersion}</span>
           <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
@@ -35,9 +33,9 @@ export function VersionSwitcher({
           <DropdownMenuItem
             key={version}
             onClick={() => setSelectedVersion(version)}
-            className="cursor-pointer"
+            className={selectedVersion === version ? "bg-accent" : ""}
           >
-            v{version}
+            Version {version}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
