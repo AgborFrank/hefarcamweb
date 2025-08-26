@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- Always use the MCP server to run migrations to the database.
+- Only focus on the task assigned, request permission if any extra feature, pages is required to fully operate a feature.
+- Suggest new features or other recommendations that align with the goal of the project
+- Don't make uneccesary changes to any fully functional feature or structure with request authorization to proceed.
+- Do not use Cards when working with forms unless requested
+- When making changes to component or page, focus on what needs to be changed rather than rewriting the entire component or page.
+- Don't make any changes to a page or form with requesting permission from me.
+ 
+- Prioritize shadcn ui for all form elements
+- Always add descriptions to forms to give more context and understanding to the users.
+- Ensure all UI elements and structure follow Shopify Dashboard design language.
+- Alway check the database for the right query tables for any database interactions
+- Prioritize developing an implementation plan on every feature request
+- Breakdown complex task into components and import on a page
+- For database related interactions, first check the MCP server config before proceeding
+- Follow user requirements carefully & to the letter
+- Think step-by-step: describe your plan in detailed pseudocode before implementation
+- Write correct, best practice, DRY, bug-free, fully functional code
+- Prioritize readability and maintainability over performance
+- Leave NO todos, placeholders, or missing pieces
+- Include all required imports and ensure proper component naming
+- Be concise and minimize unnecessary prose
+- If uncertain about an answer, say so instead of guessing
+
+
+
+- Be sure all pages, forms and components are well descriptive for easy understanding by users

@@ -1,0 +1,273 @@
+# Hefarcam Project Cursor Rules
+
+## Project Overview
+
+This is a Next.js 15 project with TypeScript, Supabase, and shadcn/ui components. The project follows Shopify Dashboard design language and uses modern development practices.
+
+## Core Technologies
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS v4
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Database**: Supabase (PostgreSQL)
+- **Linting**: Biome
+- **Maps**: Mapbox GL JS and Google Maps React
+- **Internationalization**: next-intl
+- **State Management**: React hooks and Supabase real-time
+
+## Code Style & Standards
+
+## Supabase Configuration & API Routes
+
+### Centralized Configuration
+- **ALWAYS** use the centralized Supabase configuration from `src/app/lib/supabase.ts`
+- **NEVER** create duplicate Supabase client configurations in API routes or components
+- Use the appropriate client for the context:
+  - `supabase` - For client-side components (browser usage with anon key)
+  - `supabaseAdmin` - For API routes (server-side with service role permissions)
+
+### API Route Pattern
+```typescript
+// ✅ CORRECT - Use centralized configuration
+import { supabaseAdmin } from '@/app/lib/supabase';
+
+export async function POST(request: NextRequest) {
+  // Use supabaseAdmin for server-side operations
+  const { data, error } = await supabaseAdmin.auth.signInWithPassword({
+    email,
+    password,
+  });
+}
+```
+
+```typescript
+// ❌ INCORRECT - Don't duplicate configuration
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '...';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '...';
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+### TypeScript
+
+- Use strict TypeScript configuration
+- Prefer explicit types over `any`
+- Use proper type imports: `import type { ComponentProps } from 'react'`
+- Follow Next.js 15 best practices for App Router
+- Use path aliases: `@/components/ui/button`
+
+### React & Next.js
+
+- Use functional components with hooks
+- Prefer `Readonly<Props>` for component props
+- Use proper Next.js metadata exports
+- Implement proper error boundaries
+- Use React 19 features appropriately
+
+### Component Structure
+
+```typescript
+// Preferred component structure
+import type { ComponentProps } from "react";
+import { cn } from "@/lib/utils";
+
+interface ComponentProps extends ComponentProps<"div"> {
+  // Add specific props here
+}
+
+export function Component({ className, ...props }: ComponentProps) {
+  return (
+    <div className={cn("base-styles", className)} {...props}>
+      {/* Component content */}
+    </div>
+  );
+}
+```
+
+## UI/UX Guidelines
+
+### shadcn/ui Components
+
+- **ALWAYS** use shadcn/ui components for forms and UI elements
+- Import from `@/components/ui/` directory
+- Use proper component composition patterns
+- Follow shadcn/ui theming with CSS variables
+
+### Shopify Dashboard Design Language
+
+- Clean, minimal interfaces
+- Consistent spacing and typography
+- Professional color schemes
+- Clear visual hierarchy
+- Responsive design patterns
+
+### Form Design
+
+- **ALWAYS** add descriptive text to forms
+- Use proper form validation
+- Implement accessible form controls
+- Provide clear error messages
+- Use proper form labels and descriptions
+
+## Database & Supabase
+
+### Database Operations
+
+- **ALWAYS** use MCP server for database migrations
+- Check database schema before implementing features
+- Use proper RLS (Row Level Security) policies
+- Implement proper error handling for database operations
+- Use Supabase client properly with TypeScript
+
+### Database Queries
+
+- Use parameterized queries
+- Implement proper pagination
+- Handle loading and error states
+- Use real-time subscriptions when appropriate
+
+## Development Workflow
+
+### Feature Development
+
+1. **ALWAYS** create an implementation plan first
+2. Break down complex features into components
+3. Check MCP server configuration before database operations
+4. Request permission for additional features/pages
+5. Focus only on assigned tasks unless explicitly requested
+
+### Code Organization
+
+- Use proper file naming conventions
+- Organize components by feature/domain
+- Keep components focused and single-purpose
+- Use proper import organization
+
+### Component Architecture
+
+- Break down complex pages into smaller components
+- Import components on pages as needed
+- Use proper prop drilling or context as appropriate
+- Implement proper loading states
+
+## Quality Standards
+
+### Code Quality
+
+- Write DRY, maintainable code
+- No TODOs or placeholders in production code
+- Include all necessary imports
+- Ensure proper error handling
+- Write self-documenting code
+
+### Performance
+
+- Use proper React optimization techniques
+- Implement proper loading states
+- Use Next.js Image component for images
+- Optimize bundle size
+
+### Accessibility
+
+- Use proper ARIA labels
+- Implement keyboard navigation
+- Ensure proper color contrast
+- Use semantic HTML elements
+
+## File Structure Guidelines
+
+### Components
+
+```
+src/
+├── components/
+│   ├── ui/           # shadcn/ui components
+│   ├── forms/        # Form components
+│   ├── layout/       # Layout components
+│   └── features/     # Feature-specific components
+```
+
+### Pages & Routes
+
+```
+src/app/
+├── (auth)/           # Authentication routes
+├── (dashboard)/      # Dashboard routes
+├── api/              # API routes
+└── globals.css       # Global styles
+```
+
+## Specific Rules
+
+### Forms
+
+- Use shadcn/ui form components exclusively
+- Add descriptive text and help text
+- Implement proper validation
+- Use proper form state management
+
+### Maps Integration
+
+- Use Mapbox GL JS for advanced mapping features
+- Use Google Maps React for basic mapping
+- Implement proper map controls and interactions
+- Handle map loading states
+
+### Internationalization
+
+- Use next-intl for all text content
+- Implement proper locale switching
+- Use proper date and number formatting
+- Support RTL languages if needed
+
+### Authentication
+
+- Use Supabase Auth
+- Implement proper auth flows
+- Use proper session management
+- Implement proper route protection
+
+## Error Handling
+
+- Implement proper error boundaries
+- Use proper error states in components
+- Provide meaningful error messages
+- Log errors appropriately
+
+## Testing Considerations
+
+- Write testable components
+- Use proper mocking for external dependencies
+- Implement proper test data
+- Test user interactions and flows
+
+## Security
+
+- Validate all user inputs
+- Use proper authentication and authorization
+- Implement proper CORS policies
+- Use environment variables for sensitive data
+
+## Performance Optimization
+
+- Use proper React optimization techniques
+- Implement proper caching strategies
+- Optimize images and assets
+- Use proper loading states
+
+## Documentation
+
+- Write clear component documentation
+- Document complex business logic
+- Use proper JSDoc comments
+- Maintain README files
+
+## Deployment
+
+- Use proper environment variables
+- Implement proper build optimization
+- Use proper deployment strategies
+- Monitor application performance
+
+Remember: Always prioritize user experience, code maintainability, and following the established patterns in the codebase.

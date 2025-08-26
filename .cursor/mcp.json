@@ -1,0 +1,18 @@
+{
+    "mcpServers": {
+      "hefarcam": {
+        "command": "cmd",
+        "args": [
+          "/c",
+          "npx",
+          "-y",
+          "@supabase/mcp-server-supabase@latest",
+          "--project-ref=sabhmutbersukiclmtpo"
+        ],
+        "env": {
+          "SUPABASE_ACCESS_TOKEN": "sbp_4080b8849d27c0ea1a012e936f37681784f36c9d"
+        }
+      }
+    }
+  }
+  
